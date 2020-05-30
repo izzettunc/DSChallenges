@@ -1,0 +1,13 @@
+Current Network Test Accuracy: 0.918 
+
+Current Network Test Class Accuracies:
+	T-shirt/top: 0.921
+	Trouser: 0.977
+	Pullover: 0.858
+	Dress: 0.959
+	Coat: 0.907
+	Sandal: 0.971
+	Shirt: 0.668
+	Sneaker: 0.964
+	Bag: 0.980
+	Ankle boot: 0.979
