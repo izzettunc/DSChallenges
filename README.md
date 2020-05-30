@@ -2,7 +2,7 @@
   
 |          Data          | Accuracy(Percentage) |
 |------------------------|----------------------|
-| [FASHION MNIST][DATA1] |          ~92         |
+| [FASHION MNIST][DATA1] |         ~92%         |
 
 
 
