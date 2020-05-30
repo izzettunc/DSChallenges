@@ -1,2 +1,11 @@
 # classificationChallenges
-This repo contains classification process on different datasets
+  
+|          Data          | Accuracy(Percentage) |
+|------------------------|----------------------|
+| [FASHION MNIST][DATA1] |          ~92         |
+
+
+
+
+
+[DATA1]: https://www.kaggle.com/zalando-research/fashionmnist
