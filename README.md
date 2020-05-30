@@ -1,8 +1,8 @@
 # classificationChallenges
   
-|          Data          | Accuracy(Percentage) |
-|------------------------|----------------------|
-| [FASHION MNIST][DATA1] |         ~92%         |
+|          Data          | Accuracy(Percentage) | METHOD |
+|------------------------|----------------------|--------|
+| [FASHION MNIST][DATA1] |         ~92%         |   CNN  |
 
 
 
