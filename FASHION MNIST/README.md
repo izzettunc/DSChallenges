@@ -11,5 +11,5 @@ Loss stops decreasing after 7th-ish epoch, which means I still need to work on t
 
 ![Loss Plot][loss-plot]
 
-[loss-plot]: FASHION%20MNIST/plot.png
-[network]: FASHION%20MNIST/network.png
+[loss-plot]: plot.png
+[network]: network.png
