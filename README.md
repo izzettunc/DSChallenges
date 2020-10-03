@@ -11,4 +11,4 @@
 
 [DATA1]: https://www.kaggle.com/zalando-research/fashionmnist
 [DATA2]: https://www.kaggle.com/c/titanic/data
-[FMCNN]: https://github.com/izzettunc/classificationChallenges/blob/master/FASHION%20MNIST/fashion-mnist-cnn.ipynb
+[FMCNN]: https://github.com/izzettunc/DSChallenges/blob/master/FASHION%20MNIST/fashion-mnist-cnn.ipynb
