@@ -2,7 +2,7 @@
   
 |          Data          | Accuracy(Percentage) | METHOD |
 |------------------------|----------------------|--------|
-| [FASHION MNIST][DATA1] |         ~92%         |   CNN  |
+| [FASHION MNIST][DATA1] |         ~95%         |   CNN  |
 
 
 
