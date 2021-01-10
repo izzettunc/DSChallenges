@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# amsterdam-temperature-forecast
+
+amsterdam-temperature-forecast/result
+
 TITANIC
 
 # Distribution / packaging
