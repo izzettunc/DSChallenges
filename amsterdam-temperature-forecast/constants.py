@@ -1,19 +1,25 @@
 # COLUMNS
 avg_temperature = "AvgTemperature"
 
-# METHODS
+# METHODS OF CORRELATION
 XGB = "XGBOOST"
 COR = "CORRELATION"
 
-#Errors
+# ERROR TYPES
 MAE = "MAE"
 MEDAE = "MEDAE"
 MSE = "MSE"
 MSLE = "MSLE"
 RMSE = "RMSE"
 
+# PREDICTION TYPES
 EST_EXOG = "estimated_exog"
 REAL_EXOG = "real_exog"
+BASIC = "basic"
+
+# PARAM TYPES
+INIT = "init"
+FIT = "fit"
 
 
 # Lists
@@ -22,3 +28,5 @@ sklearn_models = ["XGBRegressor","LinearRegression", "Ridge", "ElasticNet", "Las
                   "TweedieRegressor", "SGDRegressor", "PassiveAggressiveRegressor", "HuberRegressor",
                   "TheilSenRegressor", "SVR", "NuSVR", "GradientBoostingRegressor", "RandomForestRegressor",
                   "HistGradientBoostingRegressor", "DecisionTreeRegressor", "ExtraTreeRegressor", "LGBMRegressor"]
+
+statsmodels_models = ["ExponentialSmoothing","HoltWintersResultsWrapper","SARIMAX","SARIMAXResultsWrapper"]
