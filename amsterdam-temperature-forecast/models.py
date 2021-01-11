@@ -10,7 +10,8 @@ from sklearn.ensemble import (
     HistGradientBoostingRegressor
 )
 from sklearn.tree import DecisionTreeRegressor, ExtraTreeRegressor
-
+from xgboost import XGBRegressor
+from lightgbm import LGBMRegressor
 
 
 from sklearn.multioutput import MultiOutputRegressor
@@ -151,8 +152,9 @@ def run_models(data_tuple, target, forecast_horizon, report_path):
     predictor = Predictor(train, test, scaled_train, scaled_test, scalers, target)
 
     sklearn_models = [LinearRegression, Ridge, ElasticNet, Lasso, LassoLars,BayesianRidge,TweedieRegressor,SGDRegressor,
-                     PassiveAggressiveRegressor,HuberRegressor,TheilSenRegressor,SVR,NuSVR,GradientBoostingRegressor,
-                     RandomForestRegressor,HistGradientBoostingRegressor,DecisionTreeRegressor, ExtraTreeRegressor]
+                      PassiveAggressiveRegressor,HuberRegressor,TheilSenRegressor,SVR,NuSVR,GradientBoostingRegressor,
+                      RandomForestRegressor,HistGradientBoostingRegressor,DecisionTreeRegressor, ExtraTreeRegressor,
+                      LGBMRegressor,XGBRegressor]
 
     sklearn_model_params = {
         TweedieRegressor.__name__: {"max_iter": 1000}
