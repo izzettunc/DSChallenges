@@ -43,8 +43,8 @@ The scope of this project is forecasting the temperature values of amsterdam wit
     - [X] LGBMRegressor
     - [ ] Look for more
 - [ ] General time series models
-    - [ ] SARIMAX/VARMAX and all other derivations of it
-    - [ ] Holt-Winters
+    - [X] SARIMAX
+    - [X] Holt-Winters
     - [ ] BATS/TBATS
     - [ ] ETS
     - [ ] FBProphet
