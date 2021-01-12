@@ -17,6 +17,10 @@ from lightgbm import LGBMRegressor
 
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tsa.forecasting.theta import ThetaModel
+from statsmodels.tsa.exponential_smoothing.ets import ETSModel
+
+from tbats import BATS,TBATS
 
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_absolute_error as MAE, median_absolute_error as MEDAE, mean_squared_error as MSE, mean_squared_log_error as MSLE
@@ -73,6 +77,8 @@ class Predictor:
         if estimator.__name__ in c.sklearn_models:
             self.exog_estimator = ExogPredictor(estimator, parameters).fit(preprocess.get_date_based_variables(self.s_x), self.s_x)
             self.estimator = estimator(**param_init).fit(self.s_x, self.y, **param_fit)
+        elif estimator.__name__ in c.exogless_models:
+            self.estimator = estimator(**param_init).fit(self.y, **param_fit)
         elif estimator.__name__ in c.statsmodels_models:
             self.estimator = estimator(self.y, **param_init).fit(**param_fit)
 
@@ -90,6 +96,9 @@ class Predictor:
 
             self.pred_y_est_exog.index = self.pred_y_real_exog.index = self.test_y.index
             self.pred_y_est_exog.columns = self.pred_y_real_exog.columns = [self.target]
+        elif type(self.estimator).__name__ in c.exogless_models:
+            self.pred_y = pd.Series(self.estimator.forecast(len(self.test_y)))
+            self.pred_y.index = self.test_y.index
         elif type(self.estimator).__name__ in c.statsmodels_models:
             self.pred_y = self.estimator.forecast(len(self.test_y))
 
@@ -104,6 +113,10 @@ class Predictor:
             self.forecast_y = pd.DataFrame(self.estimator.predict(forecasted_x))
             self.forecast_y.index = forecast_template.index
             self.forecast_y.columns = [self.target]
+        elif type(self.estimator).__name__ in c.exogless_models:
+            self.forecast_y = pd.Series(self.estimator.forecast(len(self.test_y)+len(forecast_template)))
+            self.forecast_y = self.forecast_y.iloc[len(self.test_y):]
+            self.forecast_y.index = forecast_template.index
         elif type(self.estimator).__name__ in c.statsmodels_models:
             self.forecast_y = self.estimator.forecast(len(self.test_y)+len(forecast_template))
             self.forecast_y = self.forecast_y.iloc[len(self.test_y):]
@@ -199,9 +212,11 @@ def run_models(data_tuple, target, forecast_horizon, report_path):
                       RandomForestRegressor,HistGradientBoostingRegressor,DecisionTreeRegressor, ExtraTreeRegressor,
                       LGBMRegressor,XGBRegressor]
 
-    statsmodels_models = [SARIMAX]
+    statsmodels_models = [ETSModel, ThetaModel, ExponentialSmoothing, SARIMAX]
 
-    models = statsmodels_models#+sklearn_models
+    # TODO: Fix the issue of both bats models returns Model class as result. Therefore they write on each other.
+    exogless_models = [TBATS, BATS]
+    models = exogless_models+statsmodels_models+sklearn_models
 
     model_params = {
         TweedieRegressor.__name__: {
@@ -210,6 +225,9 @@ def run_models(data_tuple, target, forecast_horizon, report_path):
         SARIMAX.__name__:{
             c.FIT : {"disp":0},
             c.INIT: {"order":(2,1,2),"seasonal_order":(2,1,2,12)} #Test params
+        },
+        ETSModel.__name__:{
+            c.FIT : {"disp":0}
         }
     }
 

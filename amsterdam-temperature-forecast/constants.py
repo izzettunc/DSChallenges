@@ -29,4 +29,6 @@ sklearn_models = ["XGBRegressor","LinearRegression", "Ridge", "ElasticNet", "Las
                   "TheilSenRegressor", "SVR", "NuSVR", "GradientBoostingRegressor", "RandomForestRegressor",
                   "HistGradientBoostingRegressor", "DecisionTreeRegressor", "ExtraTreeRegressor", "LGBMRegressor"]
 
-statsmodels_models = ["ExponentialSmoothing","HoltWintersResultsWrapper","SARIMAX","SARIMAXResultsWrapper"]
+statsmodels_models = ["ExponentialSmoothing","HoltWintersResultsWrapper","SARIMAX","SARIMAXResultsWrapper","ThetaModel","ThetaModelResults","ETSModel","ETSResultsWrapper"]
+
+exogless_models = ["BATS","TBATS","Model"]

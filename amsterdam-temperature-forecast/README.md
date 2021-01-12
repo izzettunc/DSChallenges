@@ -45,8 +45,9 @@ The scope of this project is forecasting the temperature values of amsterdam wit
 - [ ] General time series models
     - [X] SARIMAX
     - [X] Holt-Winters
-    - [ ] BATS/TBATS
-    - [ ] ETS
+    - [X] BATS / TBATS
+    - [X] ETS
+    - [X] Theta Model
     - [ ] FBProphet
     - [ ] Look for more
 - [ ] AI based models
