@@ -51,7 +51,7 @@ The scope of this project is forecasting the temperature values of amsterdam wit
 |TBATS|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
 |ETS|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>
 |Theta|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>
-|FBProphet|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|FBProphet|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>
 |Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
 | <b>AI based models</b> | <b>Implementation</b> | <b>Optimization</b> |
 |RNN|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>

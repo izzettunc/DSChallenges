@@ -22,6 +22,8 @@ from statsmodels.tsa.exponential_smoothing.ets import ETSModel
 
 from tbats import BATS,TBATS
 
+from fbprophet import Prophet
+
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_absolute_error as MAE, median_absolute_error as MEDAE, mean_squared_error as MSE, mean_squared_log_error as MSLE
 
@@ -44,19 +46,37 @@ class ExogPredictor:
     def fit(self, x, y: pd.DataFrame):
         self.models = {}
         for column in y.columns:
-            estimator = self.estimator(**self.parameters)
-            estimator.fit(x, y[column])
-            self.models[column] = estimator
+            if self.estimator.__name__ in c.sklearn_models:
+                estimator = self.estimator(**self.parameters)
+                estimator.fit(x, y[column])
+                self.models[column] = estimator
+            elif self.estimator.__name__ in c.prophet:
+                estimator = self.estimator(**self.parameters)
+                prophet_data = x.copy(deep=True)
+                for prophet_column in prophet_data.columns:
+                    estimator.add_regressor(prophet_column)
+                prophet_data["ds"] = prophet_data.index
+                prophet_data["y"] = y[column]
+                estimator.fit(prophet_data)
+                self.models[column] = estimator
 
         return self
 
     def predict(self, x):
         predictions = {}
         for feature in self.models.keys():
-            prediction = self.models[feature].predict(x)
-            predictions[feature] = prediction
+            if self.estimator.__name__ in c.sklearn_models:
+                prediction = self.models[feature].predict(x)
+                predictions[feature] = prediction
+            elif self.estimator.__name__ in c.prophet:
+                future = x.copy(deep=True)
+                future["ds"] = x.index
+                prediction = self.models[feature].predict(future)
+                predictions[feature] = prediction["yhat"]
 
         return pd.DataFrame(predictions)
+
+
 
 
 class Predictor:
@@ -75,12 +95,22 @@ class Predictor:
         param_init = parameters[c.INIT] if c.INIT in parameters.keys() else {}
         param_fit = parameters[c.FIT] if c.FIT in parameters.keys() else {}
         if estimator.__name__ in c.sklearn_models:
-            self.exog_estimator = ExogPredictor(estimator, parameters).fit(preprocess.get_date_based_variables(self.s_x), self.s_x)
+            self.exog_estimator = ExogPredictor(estimator, param_init).fit(preprocess.get_date_based_variables(self.s_x), self.s_x)
             self.estimator = estimator(**param_init).fit(self.s_x, self.y, **param_fit)
         elif estimator.__name__ in c.exogless_models:
             self.estimator = estimator(**param_init).fit(self.y, **param_fit)
         elif estimator.__name__ in c.statsmodels_models:
             self.estimator = estimator(self.y, **param_init).fit(**param_fit)
+        elif estimator.__name__ in c.prophet:
+            self.exog_estimator = ExogPredictor(estimator, param_init).fit(preprocess.get_date_based_variables(self.s_x), self.s_x)
+            self.estimator = estimator(**param_init)
+            prophet_data = self.s_x.copy(deep=True)
+            for prophet_column in prophet_data.columns:
+                self.estimator.add_regressor(prophet_column)
+            prophet_data["ds"] = prophet_data.index
+            prophet_data["y"] = self.y
+            self.estimator.fit(prophet_data)
+
 
         return self
 
@@ -101,6 +131,19 @@ class Predictor:
             self.pred_y.index = self.test_y.index
         elif type(self.estimator).__name__ in c.statsmodels_models:
             self.pred_y = self.estimator.forecast(len(self.test_y))
+        elif type(self.estimator).__name__ in c.prophet:
+            predicted_x = self.exog_estimator.predict(preprocess.get_date_based_variables(self.test_s_x))
+            future = predicted_x.copy(deep=True)
+            future["ds"] = self.test_s_x.index
+            self.pred_y_est_exog = pd.DataFrame((self.estimator.predict(future))["yhat"])
+
+            future = self.test_s_x.copy(deep=True)
+            future["ds"] = self.test_s_x.index
+            self.pred_y_real_exog = pd.DataFrame((self.estimator.predict(future))["yhat"])
+
+            self.pred_y_est_exog.index = self.pred_y_real_exog.index = self.test_y.index
+            self.pred_y_est_exog.columns = self.pred_y_real_exog.columns = [self.target]
+
 
         return self
 
@@ -120,6 +163,17 @@ class Predictor:
         elif type(self.estimator).__name__ in c.statsmodels_models:
             self.forecast_y = self.estimator.forecast(len(self.test_y)+len(forecast_template))
             self.forecast_y = self.forecast_y.iloc[len(self.test_y):]
+        elif type(self.estimator).__name__ in c.prophet:
+            forecasted_x = self.exog_estimator.predict(preprocess.get_date_based_variables(forecast_template))
+            predicted_x = self.exog_estimator.predict(preprocess.get_date_based_variables(self.test_s_x))
+            forecasted_x = pd.concat([predicted_x, forecasted_x])
+            future = forecasted_x.copy(deep=True)
+            future.index = self.test_s_x.index.tolist()+forecast_template.index.tolist()
+            future["ds"] = future.index
+            self.forecast_y = self.estimator.predict(future)
+            self.forecast_y = pd.DataFrame(self.forecast_y.loc[len(self.test_s_x):, "yhat"])
+            self.forecast_y.index = forecast_template.index
+            self.forecast_y.columns = [self.target]
 
         return self
 
@@ -216,7 +270,10 @@ def run_models(data_tuple, target, forecast_horizon, report_path):
 
     # TODO: Fix the issue of both bats models returns Model class as result. Therefore they write on each other.
     exogless_models = [TBATS, BATS]
-    models = exogless_models+statsmodels_models+sklearn_models
+    # TODO: Silence the fit function of prophet
+    prophet = [Prophet]
+
+    models = prophet#+exogless_models+statsmodels_models+sklearn_models
 
     model_params = {
         TweedieRegressor.__name__: {
@@ -228,6 +285,11 @@ def run_models(data_tuple, target, forecast_horizon, report_path):
         },
         ETSModel.__name__:{
             c.FIT : {"disp":0}
+        },
+        Prophet.__name__:{
+            c.INIT : {
+                "yearly_seasonality":True
+            }
         }
     }
 

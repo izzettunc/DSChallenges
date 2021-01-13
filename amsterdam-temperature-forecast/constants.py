@@ -31,4 +31,7 @@ sklearn_models = ["XGBRegressor","LinearRegression", "Ridge", "ElasticNet", "Las
 
 statsmodels_models = ["ExponentialSmoothing","HoltWintersResultsWrapper","SARIMAX","SARIMAXResultsWrapper","ThetaModel","ThetaModelResults","ETSModel","ETSResultsWrapper"]
 
+prophet = ["Prophet"]
+
 exogless_models = ["BATS","TBATS","Model"]
+
