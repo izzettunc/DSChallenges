@@ -16,48 +16,51 @@ The scope of this project is forecasting the temperature values of amsterdam wit
 
 #### Models to implement
 
-- [ ] Linear models
-    - [X] LinearRegression 
-    - [X] Ridge
-    - [X] ElasticNet
-    - [X] Lasso
-    - [X] LassoLars
-    - [X] BayesianRidge
-    - [X] TweedieRegressor
-    - [X] SGDRegressor
-    - [X] PassiveAggressiveRegressor 
-    - [X] HuberRegressor
-    - [X] TheilSenRegressor
-    - [ ] Look for more
-- [ ] Support vector machine based models    
-    - [X] SVR
-    - [X] NuSVR
-    - [ ] Look for more
-- [ ] Decision tree based models
-    - [X] GradientBoostingRegressor
-    - [X] RandomForestRegressor
-    - [X] HistGradientBoostingRegressor
-    - [X] DecisionTreeRegressor
-    - [X] ExtraTreeRegressor
-    - [X] XGBRegressor
-    - [X] LGBMRegressor
-    - [ ] Look for more
-- [ ] General time series models
-    - [X] SARIMAX
-    - [X] Holt-Winters
-    - [X] BATS / TBATS
-    - [X] ETS
-    - [X] Theta Model
-    - [ ] FBProphet
-    - [ ] Look for more
-- [ ] AI based models
-    - [ ] RNN
-    - [ ] LSTM
-    - [ ] Transformers
-    - [ ] Autoencoders
-    - [ ] CNN
-    - [ ] Wavenet
-    - [ ] U-Net
-    - [ ] N-Beats
-    - [ ] GAN
-    - [ ] Look for more
+
+| Linear Models | Implementation | Optimization |
+|---------------|----------------|--------------|
+|Linear Regression|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Ridge|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|ElasticNet|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Lasso|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|LassoLars|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|BayesianRidge|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|TweedieRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|SGDRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|PassiveAggressiveRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|HuberRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|TheilSenRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>|
+| <b>Support Vector Machine Based</b> | <b>Implementation</b> | <b>Optimization</b> |
+|SVR|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|NuSVR|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>|
+| <b>Decision tree based models</b> | <b>Implementation</b> | <b>Optimization</b> |
+|GradientBoostingRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|RandomForestRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|HistGradientBoostingRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|DecisionTreeRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|ExtraTreeRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|XGBRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|LGBMRegressor|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>|
+| <b>General time series models</b> | <b>Implementation</b> | <b>Optimization</b> |
+|SARIMAX|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|Holt-Winters|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|BATS|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|TBATS|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>|
+|ETS|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>
+|Theta|<ul><li>- [x] </li></ul>| <ul><li>- [ ] </li></ul>
+|FBProphet|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+| <b>AI based models</b> | <b>Implementation</b> | <b>Optimization</b> |
+|RNN|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|LSTM|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|Transformers|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|Autoencoders|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|CNN|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|Wavenet|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|U-Net|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|N-Beats|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|GAN|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
+|Look for more|<ul><li>- [ ] </li></ul>| <ul><li>- [ ] </li></ul>
