@@ -4,7 +4,7 @@
 |------------------------|----------------------|--------|---------------|
 | [FASHION MNIST][DATA1] |         ~95%         |   CNN  | [HERE][FMCNN] |
 |    [TITANIC][DATA2]    |     WORKING ON IT    |    -   |       -       |
-
+|    AMSTERDAM TEMPERATURE FORECAST  |     WORKING ON IT    |    -   |       -       |
 
 
 
